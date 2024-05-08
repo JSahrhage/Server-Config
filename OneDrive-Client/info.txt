@@ -1,0 +1,9 @@
+sudo docker exec -it OneDrive-Client /bin/bash
+
+tmux new-session -s onedrive
+
+onedrive --monitor --syncdir="/app/syncdir" --confdir="/app/config"
+
+CTRL + b; d
+
+tmux attach-session -t onedrive

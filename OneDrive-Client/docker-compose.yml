@@ -1,0 +1,22 @@
+name: onedrive-client
+
+networks:
+    onedrive-client-network:
+        driver: bridge
+
+services:
+    onedrive-client:
+        container_name: OneDrive-Client
+        build: .
+        image: onedrive-client
+        command: |
+            sh -c 
+            "
+            tail -F anything
+            "
+        working_dir: /app
+        volumes:
+            - ./syncdir:/app/syncdir
+            - ./config:/app/config
+        environment:
+            - TZ=UTC+2
