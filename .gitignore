@@ -20,3 +20,8 @@ Backup-Encrypter/encrypt/*
 !Backup-Encrypter/encrypt/.gitkeep
 
 ### Traefik-Reverse-Proxy ###
+
+# Ignore everything in the letsencrypt directory
+Traefik-Reverse-Proxy/letsencrypt/*
+# But don't ignore .gitkeep
+!Traefik-Reverse-Proxy/letsencrypt/.gitkeep

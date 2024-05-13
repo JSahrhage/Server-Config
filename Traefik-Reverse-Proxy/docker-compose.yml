@@ -1,0 +1,46 @@
+name: traefik
+
+networks:
+    traefik-proxy:
+        name: traefik-proxy
+        driver: bridge
+
+services:
+    traefik:
+        container_name: "Traefik-Reverse-Proxy"
+        image: "traefik:latest"
+        command:
+            - "--api.insecure=false"
+            - "--api.dashboard=true"
+            - "--log.level=WARN"
+            - "--providers.docker=true"
+            - "--providers.docker.exposedbydefault=false"
+            - "--entrypoints.web.address=:80"
+            - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+            - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+            - "--entrypoints.websecure.address=:443"
+            - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+            - "--certificatesresolvers.letsencrypt.acme.email=misc.temp.mail@proton.me"
+            - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+        volumes:
+            - "./letsencrypt:/letsencrypt"
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
+        restart: unless-stopped
+        networks:
+            - traefik-proxy
+        logging:
+            options:
+                max-size: 500m
+                max-file: "5"
+        ports:
+            - "443:443"
+            - "80:80"
+#            - "8080:8080"
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.traefik-reverse-proxy.rule=Host(`traefik.jansa.ddnsfree.com`)"
+            - "traefik.http.routers.traefik-reverse-proxy.service=api@internal"
+            - "traefik.http.routers.traefik-reverse-proxy.entrypoints=websecure"
+            - "traefik.http.routers.traefik-reverse-proxy.tls.certresolver=letsencrypt"
+            - "traefik.http.routers.traefik-reverse-proxy.middlewares=traefik-reverse-proxy-auth"
+            - "traefik.http.middlewares.traefik-reverse-proxy-auth.basicauth.users=jansa:$$apr1$$2BZ4grwa$$pfUD2cMAgsdnnAaifLTtH1"
