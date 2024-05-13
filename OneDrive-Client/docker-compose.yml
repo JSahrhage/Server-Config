@@ -10,7 +10,7 @@ services:
         build: .
         image: onedrive-client
         command: |
-            sh -c 
+            sh -c
             "
             tail -F anything
             "
@@ -20,3 +20,4 @@ services:
             - ./config:/app/config
         environment:
             - TZ=UTC+2
+        restart: unless-stopped

@@ -2,12 +2,12 @@
 
 # Ignore everything in the config directory
 OneDrive-Client/config/*
-
 # But don't ignore sync_list
 !OneDrive-Client/config/sync_list
 
 # Ignore everything in the Auto-Backup directory
 OneDrive-Client/syncdir/Auto-Backup/*
-
 # But don't ignore .gitkeep
 !OneDrive-Client/syncdir/Auto-Backup/.gitkeep
+
+### Traefik-Reverse-Proxy ###
