@@ -10,4 +10,13 @@ OneDrive-Client/syncdir/Auto-Backup/*
 # But don't ignore .gitkeep
 !OneDrive-Client/syncdir/Auto-Backup/.gitkeep
 
+### Backup-Encrypter ###
+
+# Ignore .env
+Backup-Encrypter/.env
+# Ignore everything in the encrypt directory
+Backup-Encrypter/encrypt/*
+# But don't ignore .gitkeep
+!Backup-Encrypter/encrypt/.gitkeep
+
 ### Traefik-Reverse-Proxy ###

@@ -1,0 +1,27 @@
+name: backup-encrypter
+
+networks:
+    backup-encrypter-network:
+        driver: bridge
+
+services:
+    backup-encrypter:
+        container_name: Backup-Encrypter
+        build: .
+        image: backup-encrypter
+        command: |
+            sh -c
+            "
+            chmod 0644 /etc/cron.d/cronjob &&
+            crontab /etc/cron.d/cronjob &&
+            touch /var/log/cron.log &&
+            cron &&
+            tail -f /var/log/cron.log
+            "
+        working_dir: /app
+        volumes:
+            - ./main.sh:/app/main.sh
+            - ./cronjob:/etc/cron.d/cronjob
+            - ./encrypt:/app/encrypt
+            - ${ONEDRIVE_CLIENT_DIR}:/app/syncdir
+        restart: unless-stopped
