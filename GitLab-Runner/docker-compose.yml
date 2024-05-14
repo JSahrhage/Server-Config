@@ -1,0 +1,10 @@
+name: gitlab-runner-vTODO
+
+services:
+    gitlab-runner-vTODO:
+        container_name: GitLab-Runner-vTODO
+        image: gitlab/gitlab-runner:latest
+        volumes:
+            - ./config:/etc/gitlab-runner
+            - /var/run/docker.sock:/var/run/docker.sock
+        restart: unless-stopped

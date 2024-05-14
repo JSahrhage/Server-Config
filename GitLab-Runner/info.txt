@@ -1,0 +1,1 @@
+sudo docker exec -it GitLab-Runner-vTODO gitlab-runner register --non-interactive --url "https://gitlab.jansa.ddnsfree.com/" --token "TODO" --executor "docker" --docker-image alpine:latest --description "GitLab-Runner-vTODO"

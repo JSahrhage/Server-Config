@@ -30,3 +30,17 @@ Traefik-Reverse-Proxy/letsencrypt/*
 
 # Ignore everything in the Data directory
 GitLab/Data/*
+
+# Ignore everything in the GitLab-Runner directory
+GitLab-Runner/*
+# But don't ignore docker-compose.yml and info.txt
+!GitLab-Runner/docker-compose.yml
+!GitLab-Runner/info.txt
+
+### Masterarbeit ###
+
+# Ignore everything in the Masterarbeit-Documentation directory
+Masterarbeit-Documentation
+
+# Ignore everything in the Masterarbeit-Webhook-Updater directory
+Masterarbeit-Webhook-Updater
