@@ -25,3 +25,8 @@ Backup-Encrypter/encrypt/*
 Traefik-Reverse-Proxy/letsencrypt/*
 # But don't ignore .gitkeep
 !Traefik-Reverse-Proxy/letsencrypt/.gitkeep
+
+### GitLab ###
+
+# Ignore everything in the Data directory
+GitLab/Data/*

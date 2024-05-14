@@ -1,7 +1,8 @@
 name: backup-encrypter
 
 networks:
-    backup-encrypter-network:
+    backup-encrypter:
+        name: backup-encrypter
         driver: bridge
 
 services:
@@ -20,8 +21,12 @@ services:
             "
         working_dir: /app
         volumes:
-            - ./main.sh:/app/main.sh
+            - /var/run/docker.sock:/var/run/docker.sock:ro
             - ./cronjob:/etc/cron.d/cronjob
             - ./encrypt:/app/encrypt
+            - ./main.sh:/app/main.sh
+            - ./gitlab.sh:/app/gitlab.sh
             - ${ONEDRIVE_CLIENT_DIR}:/app/syncdir
+            - ${GITLAB_CONFIG_DIR}:/app/gitlab/config
+            - ${GITLAB_BACKUPS_DIR}:/app/gitlab/backups
         restart: unless-stopped

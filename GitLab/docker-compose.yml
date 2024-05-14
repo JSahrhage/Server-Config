@@ -1,0 +1,36 @@
+name: gitlab
+
+networks:
+    traefik-proxy:
+        external: true
+
+services:
+    gitlab:
+        image: gitlab/gitlab-ce:16.9.8-ce.0
+        container_name: GitLab
+        hostname: 'gitlab.jansa.ddnsfree.com'
+        environment:
+            GITLAB_OMNIBUS_CONFIG: |
+                # Add any other gitlab.rb configuration here, each on its own line
+                external_url 'https://gitlab.jansa.ddnsfree.com'
+                letsencrypt['enable'] = false
+                nginx['listen_port'] = 80
+                nginx['listen_https'] = false
+        expose:
+            - '443:443'
+        ports:
+            - '22:22'
+        volumes:
+            - './Data/config:/etc/gitlab'
+            - './Data/logs:/var/log/gitlab'
+            - './Data/data:/var/opt/gitlab'
+        shm_size: '256m'
+        restart: unless-stopped
+        networks:
+            - traefik-proxy
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.gitlab.rule=Host(`gitlab.jansa.ddnsfree.com`)"
+            - "traefik.http.routers.gitlab.entrypoints=websecure"
+            - "traefik.http.routers.gitlab.tls.certresolver=letsencrypt"
+            - "traefik.http.services.gitlab.loadbalancer.server.port=80"
