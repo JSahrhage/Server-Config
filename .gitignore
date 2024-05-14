@@ -37,6 +37,14 @@ GitLab-Runner/*
 !GitLab-Runner/docker-compose.yml
 !GitLab-Runner/info.txt
 
+### Hedgedoc ###
+
+# Ignore everything in the Hedgedoc directory
+Hedgedoc/*
+# But don't ignore docker-compose.yml and info.txt
+!Hedgedoc/docker-compose.yml
+!Hedgedoc/info.txt
+
 ### Masterarbeit ###
 
 # Ignore everything in the Masterarbeit-Documentation directory
@@ -44,3 +52,5 @@ Masterarbeit-Documentation
 
 # Ignore everything in the Masterarbeit-Webhook-Updater directory
 Masterarbeit-Webhook-Updater
+
+

@@ -1,0 +1,50 @@
+name: hedgedoc
+
+networks:
+    traefik-proxy:
+        external: true
+
+services:
+    database:
+        container_name: Hedgedoc-Database
+        image: postgres:alpine
+        environment:
+            - POSTGRES_USER=hedgedoc
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_DB=hedgedoc
+        volumes:
+            - ./database:/var/lib/postgresql/data
+        restart: unless-stopped
+        networks:
+            - traefik-proxy
+
+    app:
+        container_name: Hedgedoc-App
+        image: quay.io/hedgedoc/hedgedoc:latest
+        environment:
+            - CMD_DB_URL=postgres://hedgedoc:password@database:5432/hedgedoc
+            - CMD_DOMAIN=hedgedoc.jansa.ddnsfree.com
+            - CMD_PORT=3000
+            - CMD_URL_ADDPORT=false
+            - CMD_PROTOCOL_USESSL=true
+            - CMD_HSTS_ENABLE=true
+            - NODE_ENV=production
+            - CMD_ALLOW_ANONYMOUS=false
+            - CMD_ALLOW_ANONYMOUS_EDITS=true
+            - CMD_DEFAULT_PERMISSION=private
+            - CMD_ALLOW_EMAIL_REGISTER=false
+            - CMD_ALLOW_GRAVATAR=false
+        volumes:
+            - ./uploads:/hedgedoc/public/uploads
+        restart: unless-stopped
+        depends_on:
+            - database
+        networks:
+            - traefik-proxy
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.hedgedoc.rule=Host(`hedgedoc.jansa.ddnsfree.com`)"
+            - "traefik.http.routers.hedgedoc.entrypoints=websecure"
+            - "traefik.http.routers.hedgedoc.tls.certresolver=letsencrypt"
+            - "traefik.http.services.hedgedoc.loadbalancer.server.port=3000"
+
