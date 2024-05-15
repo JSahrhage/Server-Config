@@ -26,6 +26,7 @@ services:
             - ./encrypt:/app/encrypt
             - ./main.sh:/app/main.sh
             - ./gitlab.sh:/app/gitlab.sh
+            - ./hedgedoc.sh:/app/hedgedoc.sh
             - ${ONEDRIVE_CLIENT_DIR}:/app/syncdir
             - ${GITLAB_CONFIG_DIR}:/app/gitlab/config
             - ${GITLAB_BACKUPS_DIR}:/app/gitlab/backups
