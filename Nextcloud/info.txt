@@ -1,0 +1,2 @@
+# Before run:
+sudo docker volume create --driver local --name nextcloud_aio_backupdir -o device="/mnt/970EVO_nvme0n1/Nextcloud/Backups" -o type="none" -o o="bind"
