@@ -1,10 +1,12 @@
 #!/bin/bash
 
+source .env
+
 cd /app
 
 tar czf compressed.tar.gz ./encrypt
 
-echo "6iVA-bAcT-b2ex-5IXI-W66j-mzFE-N9z6-NAW5" | gpg --batch --yes --passphrase-fd 0 --symmetric --cipher-algo AES256 -c compressed.tar.gz
+echo "$GPG_KEY" | gpg --batch --yes --passphrase-fd 0 --symmetric --cipher-algo AES256 -c compressed.tar.gz
 
 # Set the time zone to UTC+2
 export TZ=UTC+2

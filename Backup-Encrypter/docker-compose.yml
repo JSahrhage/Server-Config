@@ -23,6 +23,7 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock:ro
             - ./cronjob:/etc/cron.d/cronjob
+            - ./.env:/app/.env
             - ./encrypt:/app/encrypt
             - ./main.sh:/app/main.sh
             - ./gitlab.sh:/app/gitlab.sh
