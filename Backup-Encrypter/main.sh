@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source .env
+source /app/.env
 
 cd /app
 
