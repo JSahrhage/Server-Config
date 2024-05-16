@@ -31,4 +31,5 @@ services:
             - ${ONEDRIVE_CLIENT_DIR}:/app/syncdir
             - ${GITLAB_CONFIG_DIR}:/app/gitlab/config
             - ${GITLAB_BACKUPS_DIR}:/app/gitlab/backups
+            - ${NEXTCLOUD_BACKUPS_DIR}:/app/encrypt/nextcloud
         restart: unless-stopped
