@@ -1,0 +1,94 @@
+name: penpot
+
+networks:
+    traefik-proxy:
+        external: true
+
+volumes:
+    penpot_postgres_v15:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /home/jan/Server/Docker/Penpot/postgres
+    penpot_assets:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /home/jan/Server/Docker/Penpot/assets
+
+services:
+    penpot-frontend:
+        image: "penpotapp/frontend:latest"
+        restart: always
+        ports:
+            - 9001:80
+        volumes:
+            - penpot_assets:/opt/data/assets
+        depends_on:
+            - penpot-backend
+            - penpot-exporter
+        networks:
+            - traefik-proxy
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.penpot.rule=Host(`penpot.jansa.ddnsfree.com`)"
+            - "traefik.http.routers.penpot.entrypoints=websecure"
+            - "traefik.http.routers.penpot.tls.certresolver=letsencrypt"
+            - "traefik.http.routers.penpot.middlewares=penpot-http-redirect"
+            - "traefik.http.middlewares.penpot-http-redirect.redirectscheme.scheme=https"
+            - "traefik.http.middlewares.penpot-http-redirect.redirectscheme.permanent=true"
+            - "traefik.http.services.penpot.loadbalancer.server.port=80"
+        environment:
+            - PENPOT_FLAGS=disable-registration enable-login-with-password
+
+    penpot-backend:
+        image: "penpotapp/backend:latest"
+        restart: always
+        volumes:
+            - penpot_assets:/opt/data/assets
+        depends_on:
+            - penpot-postgres
+            - penpot-redis
+        networks:
+            - traefik-proxy
+        environment:
+            - PENPOT_FLAGS=disable-registration enable-login-with-password disable-email-verification
+            - PENPOT_PUBLIC_URI=http://localhost:9001
+            - PENPOT_DATABASE_URI=postgresql://penpot-postgres/penpot
+            - PENPOT_DATABASE_USERNAME=penpot
+            - PENPOT_DATABASE_PASSWORD=penpot
+            - PENPOT_REDIS_URI=redis://penpot-redis/0
+            - PENPOT_ASSETS_STORAGE_BACKEND=assets-fs
+            - PENPOT_STORAGE_ASSETS_FS_DIRECTORY=/opt/data/assets
+            - PENPOT_TELEMETRY_ENABLED=false
+
+    penpot-exporter:
+        image: "penpotapp/exporter:latest"
+        restart: always
+        networks:
+            - traefik-proxy
+        environment:
+            - PENPOT_PUBLIC_URI=http://penpot-frontend
+            - PENPOT_REDIS_URI=redis://penpot-redis/0
+
+    penpot-postgres:
+        image: "postgres:15"
+        restart: always
+        stop_signal: SIGINT
+        volumes:
+            - penpot_postgres_v15:/var/lib/postgresql/data
+        networks:
+            - traefik-proxy
+        environment:
+            - POSTGRES_INITDB_ARGS=--data-checksums
+            - POSTGRES_DB=penpot
+            - POSTGRES_USER=penpot
+            - POSTGRES_PASSWORD=penpot
+
+    penpot-redis:
+        image: redis:7
+        restart: always
+        networks:
+            - traefik-proxy

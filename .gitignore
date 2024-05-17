@@ -45,6 +45,12 @@ Hedgedoc/*
 !Hedgedoc/docker-compose.yml
 !Hedgedoc/info.txt
 
+### Penpot ###
+
+Penpot/*
+!Penpot/info.md
+!Penpot/docker-compose.yml
+
 ### Masterarbeit ###
 
 # Ignore everything in the Masterarbeit-Documentation directory
