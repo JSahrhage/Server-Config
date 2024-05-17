@@ -5,3 +5,4 @@
 
 20 4 * * * /bin/bash /app/gitlab.sh >> /var/log/cron.log 2>&1
 0 5 * * * /bin/bash /app/hedgedoc.sh >> /var/log/cron.log 2>&1
+20 5 * * * /bin/bash /app/penpot.sh >> /var/log/cron.log 2>&1
