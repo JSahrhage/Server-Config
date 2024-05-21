@@ -53,10 +53,6 @@ Penpot/*
 
 ### Masterarbeit ###
 
-# Ignore everything in the Masterarbeit-Documentation directory
 Masterarbeit-Documentation
-
-# Ignore everything in the Masterarbeit-Webhook-Updater directory
+Masterarbeit-LaTeX-Viewer
 Masterarbeit-Webhook-Updater
-
-
