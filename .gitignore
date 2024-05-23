@@ -56,3 +56,9 @@ Penpot/*
 Masterarbeit-Documentation
 Masterarbeit-Landingpage
 Masterarbeit-Webhook-Updater
+
+### Minecraft ###
+
+Minecraft/HF-Wir/*
+!Minecraft/HF-Wir/docker-compose.yml
+!Minecraft/HF-Wir/Dockerfile

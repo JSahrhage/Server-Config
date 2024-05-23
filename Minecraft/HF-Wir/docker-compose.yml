@@ -1,0 +1,48 @@
+name: minecraft-hf-wir
+
+networks:
+    minecraft-hf-wir:
+        name: minecraft-hf-wir
+        driver: bridge
+
+services:
+    minecraft-hf-wir:
+        container_name: Minecraft-HF-Wir
+        build: .
+        image: minecraft-hf-wir
+        tty: true
+        stdin_open: true
+        volumes:
+            - './data:/data'
+        ports:
+            - '25565:25565'
+        environment:
+            EULA: "TRUE"
+            INIT_MEMORY: 1G
+            MAX_MEMORY: 4G
+            USE_AIKAR_FLAGS: "TRUE"
+            TYPE: FABRIC
+            VERSION: 1.20.6
+            MOTD: "A §l§cHF-Wir§r §nMinecraft server"
+            DIFFICULTY: "hard"
+            WHITELIST: |
+                JanZather
+                AidsRacer
+            OPS: |
+                TODO
+            MAX_PLAYERS: 8
+            ALLOW_NETHER: "TRUE"
+            ANNOUNCE_PLAYER_ACHIEVEMENTS: "FALSE"
+            ENABLE_COMMAND_BLOCK: "TRUE"
+            GENERATE_STRUCTURES: "TRUE"
+            SNOOPER_ENABLED: "FALSE"
+            SPAWN_ANIMALS: "TRUE"
+            SPAWN_MONSTERS: "TRUE"
+            SPAWN_NPCS: "TRUE"
+            SPAWN_PROTECTION: 0
+            VIEW_DISTANCE: 16
+            LEVEL: HF-WIR_05-24_1-20-6_FABRIC
+            ONLINE_MODE: "TRUE"
+            ALLOW_FLIGHT: "TRUE"
+            SERVER_NAME: "HF-Wir"
+        restart: unless-stopped
