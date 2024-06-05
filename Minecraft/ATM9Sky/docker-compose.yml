@@ -1,0 +1,31 @@
+name: minecraft-atm9sky
+
+networks:
+    minecraft-atm9sky:
+        name: minecraft-atm9sky
+        driver: bridge
+
+services:
+    minecraft-atm9sky:
+        container_name: Minecraft-ATM9Sky
+        build: .
+        image: minecraft-atm9sky
+        tty: true
+        stdin_open: true
+        volumes:
+            - './data:/data'
+            - './modpack:/modpack'
+        ports:
+            - '25565:25565'
+        environment:
+            EULA: "TRUE"
+            MEMORY: 16G
+            TYPE: CURSEFORGE
+            VERSION: 1.20.1
+            CF_SERVER_MOD: /modpack/ATM9Sky_9_Server_1.0.0.zip
+            WHITELIST: |
+                JanZather
+            OPS: |
+                JanZather
+            SERVER_NAME: "ATM9Sky-Private"
+        restart: unless-stopped

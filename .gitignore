@@ -62,6 +62,9 @@ Masterarbeit-Webhook-Updater
 Minecraft/HF-Wir/*
 !Minecraft/HF-Wir/docker-compose.yml
 !Minecraft/HF-Wir/Dockerfile
+Minecraft/ATM9Sky/*
+!Minecraft/ATM9Sky/docker-compose.yml
+!Minecraft/ATM9Sky/Dockerfile
 
 ### Misc ###
 
