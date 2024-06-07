@@ -1,76 +1,44 @@
-### OneDrive-Client ###
-
-# Ignore everything in the config directory
-OneDrive-Client/config/*
-# But don't ignore sync_list
-!OneDrive-Client/config/sync_list
-
-# Ignore everything in the Auto-Backup directory
-OneDrive-Client/syncdir/Auto-Backup/*
-# But don't ignore .gitkeep
-!OneDrive-Client/syncdir/Auto-Backup/.gitkeep
-
 ### Backup-Encrypter ###
-
-# Ignore .env
 Backup-Encrypter/.env
-# Ignore everything in the encrypt directory
 Backup-Encrypter/encrypt/*
-# But don't ignore .gitkeep
 !Backup-Encrypter/encrypt/.gitkeep
-
-### Traefik-Reverse-Proxy ###
-
-# Ignore everything in the letsencrypt directory
-Traefik-Reverse-Proxy/letsencrypt/*
-# But don't ignore .gitkeep
-!Traefik-Reverse-Proxy/letsencrypt/.gitkeep
-
 ### GitLab ###
-
-# Ignore everything in the Data directory
 GitLab/Data/*
-
-# Ignore everything in the GitLab-Runner directory
 GitLab-Runner/*
-# But don't ignore docker-compose.yml and info.txt
 !GitLab-Runner/docker-compose.yml
 !GitLab-Runner/info.txt
-
 ### Hedgedoc ###
-
-# Ignore everything in the Hedgedoc directory
 Hedgedoc/*
-# But don't ignore docker-compose.yml and info.txt
 !Hedgedoc/docker-compose.yml
 !Hedgedoc/info.txt
-
-### Penpot ###
-
-Penpot/*
-!Penpot/info.md
-!Penpot/docker-compose.yml
-
 ### Masterarbeit ###
-
 Masterarbeit-Documentation
 Masterarbeit-Landingpage
 Masterarbeit-Webhook-Updater
-
 ### Minecraft ###
-
 Minecraft/HF-Wir/*
 !Minecraft/HF-Wir/docker-compose.yml
 !Minecraft/HF-Wir/Dockerfile
 Minecraft/ATM9Sky/*
 !Minecraft/ATM9Sky/docker-compose.yml
 !Minecraft/ATM9Sky/Dockerfile
-
 ### Misc ###
-
 Misc/
-
+### OneDrive-Client ###
+OneDrive-Client/config/*
+!OneDrive-Client/config/sync_list
+OneDrive-Client/syncdir/Auto-Backup/*
+!OneDrive-Client/syncdir/Auto-Backup/.gitkeep
+### Penpot ###
+Penpot/*
+!Penpot/info.md
+!Penpot/docker-compose.yml
+### Portainer ###
+Portainer/.env
+Portainer/data
+### Traefik-Reverse-Proxy ###
+Traefik-Reverse-Proxy/letsencrypt/*
+!Traefik-Reverse-Proxy/letsencrypt/.gitkeep
 ### Twitch-Channel-Points-Miner ###
-
 Twitch-Channel-Points-Miner/analytics
 Twitch-Channel-Points-Miner/logs

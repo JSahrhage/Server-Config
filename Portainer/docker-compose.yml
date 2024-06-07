@@ -1,0 +1,30 @@
+name: portainer
+
+networks:
+    traefik-proxy:
+        external: true
+
+volumes:
+    portainer_data:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /home/jan/Server/Docker/Portainer/data
+
+services:
+    portainer:
+        container_name: Portainer
+        image: portainer/portainer-ce:latest
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - portainer_data:/data
+        restart: unless-stopped
+        networks:
+            - traefik-proxy
+        labels:
+            - 'traefik.enable=true'
+            - 'traefik.http.routers.portainer.rule=Host(`${HOST_NAME}`)'
+            - 'traefik.http.routers.portainer.entrypoints=websecure'
+            - 'traefik.http.routers.portainer.tls.certresolver=letsencrypt'
+            - "traefik.http.services.portainer.loadbalancer.server.port=9000"
