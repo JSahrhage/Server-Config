@@ -22,7 +22,7 @@ services:
             MEMORY: 16G
             TYPE: CURSEFORGE
             VERSION: 1.20.1
-            CF_SERVER_MOD: /modpack/ATM9Sky_Server_1.0.4.zip
+            CF_SERVER_MOD: /modpack/ATM9Sky_Server_1.0.9.zip
             WHITELIST: |
                 JanZather
             OPS: |
