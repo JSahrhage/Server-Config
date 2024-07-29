@@ -1,3 +1,7 @@
+### Ark ###
+Ark/*
+!Ark/docker-compose.yml
+!Ark/MyConfig
 ### Backup-Encrypter ###
 Backup-Encrypter/.env
 Backup-Encrypter/encrypt/*
