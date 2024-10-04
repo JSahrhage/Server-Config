@@ -6,7 +6,7 @@ networks:
 
 services:
     gitlab:
-        image: gitlab/gitlab-ce:17.1.2-ce.0
+        image: gitlab/gitlab-ce:17.4.1-ce.0
         container_name: GitLab
         hostname: 'gitlab.jansa.ddnsfree.com'
         environment:
